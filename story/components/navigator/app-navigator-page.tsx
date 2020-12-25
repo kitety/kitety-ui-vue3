@@ -1,7 +1,7 @@
 import { DefineComponent, defineComponent, markRaw, reactive, watch } from "vue";
 import { injectAppNavigator } from "./app-navigator";
 
- const AppNavigatorPage = defineComponent({
+const AppNavigatorPage = defineComponent({
   setup() {
     const navigator = injectAppNavigator()
     const state = reactive({
@@ -12,12 +12,11 @@ import { injectAppNavigator } from "./app-navigator";
       reset: async () => {
         const { route } = navigator.state
         let { path } = route
-        console.log('path: ', path);
         // 没有path return
         if (!path) return
         // 根据path引入文件
         if (path.charAt(0) === '/') {
-          path = path.slice(0)
+          path = path.slice(1)
         }
         // 拿到es模块
         const Component = (await import(`story/pages/${path}`)).default

@@ -26,7 +26,7 @@ function useAppNavigation(props: { defaultPath?: string }) {
   })
   const methods = {
     go(path: string) {
-      window.location.hash = encodeURIComponent(path)
+      window.location.hash = path
     }
   }
   const handle = {
