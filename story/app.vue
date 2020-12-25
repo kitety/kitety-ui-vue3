@@ -62,6 +62,7 @@ body {
     }
     .app-content {
       flex: 1;
+      padding: 20px;
     }
   }
 }
