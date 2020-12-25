@@ -1,11 +1,11 @@
-import { defineComponent, reactive, onBeforeMount, provide, inject, onBeforeUnmount } from 'vue'
+import { defineComponent, reactive, provide, inject, onBeforeUnmount } from 'vue'
 
 interface Route {
   path?: string
   hash?: string
   param?: { [key: string]: string }
 }
-const APP_NAVIGATION_PROVIDER = '@@app-navigator'
+const APP_NAVIGATION_PROVIDER = '@@APP_NAVIGATION_PROVIDER'
 /**
  * hash 路由
  */
@@ -44,10 +44,11 @@ function useAppNavigation(props: { defaultPath?: string }) {
   provide(APP_NAVIGATION_PROVIDER, refer)
   return refer
 }
-export function injectAppNavigation() {
+export function injectAppNavigator(): ReturnType<typeof useAppNavigation> {
+  // 组件调用的时候方便获取类型
   return inject(APP_NAVIGATION_PROVIDER) as ReturnType<typeof useAppNavigation>
 }
-export const AppNavigation = defineComponent({
+const AppNavigation = defineComponent({
   name: 'app-navigation',
   props: { defaultPath: String },
   setup(props, setupContext) {
@@ -55,3 +56,4 @@ export const AppNavigation = defineComponent({
     return () => !!setupContext.slots.default ? setupContext.slots.default() : null
   }
 })
+export default AppNavigation;
