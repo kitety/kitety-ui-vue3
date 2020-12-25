@@ -8,6 +8,9 @@
       border-radius: 2px;
       font-size: 16px;
     }
+    & > button {
+      height: 36px;
+    }
     // 应用status
     @include statusMixin(input) {
       border: solid 1px $value;
